@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/2.5">
+	<id>ListImageCache</id>
+	<filename>ListImageCache</filename>
+	<name>ListImageCache</name>
+	<versionNumber>1.0.0</versionNumber>
+	<initialWindow>
+		<content>[This value will be overwritten by Flash Builder in the output app.xml]</content>
+	<autoOrients>true</autoOrients>
+    <fullScreen>true</fullScreen>
+    <visible>true</visible>
+  </initialWindow>
+</application>
