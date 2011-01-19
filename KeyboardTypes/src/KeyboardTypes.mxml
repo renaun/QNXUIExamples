@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<r:QApplication
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:r="http://ns.renaun.com/mxml/2010"
+	margins="{Vector.&lt;Number&gt;([12,12,12,12])}"
+	flow="{ContainerFlow.VERTICAL}"
+	size="100" sizeUnit="{SizeUnit.PERCENT}"
+	xmlns:text="qnx.ui.text.*" 
+	xmlns:listClasses="qnx.ui.listClasses.*">
+	<fx:Script>
+		<![CDATA[
+			import qnx.ui.core.ContainerFlow;
+			import qnx.ui.core.SizeUnit;
+			import qnx.ui.data.DataProvider;
+			import qnx.ui.text.ReturnKeyType;
+			
+			[Bindable]
+			private var returnKey:String = ReturnKeyType.DEFAULT;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<fx:Array id="returnKeyTypes">
+			<fx:Object label="{ReturnKeyType.DEFAULT}" />
+			<fx:Object label="{ReturnKeyType.CONNECT}" />
+			<fx:Object label="{ReturnKeyType.DONE}" />
+			<fx:Object label="{ReturnKeyType.GO}" />
+			<fx:Object label="{ReturnKeyType.JOIN}" />
+			<fx:Object label="{ReturnKeyType.NEXT}" />
+			<fx:Object label="{ReturnKeyType.SEARCH}" />
+			<fx:Object label="{ReturnKeyType.SEND}" />
+			<fx:Object label="{ReturnKeyType.SUBMIT}" />
+			<fx:Object label="Renaun" />
+		</fx:Array>
+	</fx:Declarations>
+	<text:TextInput text="Default" keyboardType="{qnx.ui.text.KeyboardType.DEFAULT}" 
+					returnKeyType="{returnKey}" />
+	<text:TextInput text="Email" keyboardType="{qnx.ui.text.KeyboardType.EMAIL}" 
+					returnKeyType="{returnKey}" />
+	<text:TextInput text="Phone" keyboardType="{qnx.ui.text.KeyboardType.PHONE}" 
+					returnKeyType="{returnKey}" />
+	<text:TextInput text="Pin" keyboardType="{qnx.ui.text.KeyboardType.PIN}" 
+					returnKeyType="{returnKey}" />
+	<text:TextInput text="url" keyboardType="{qnx.ui.text.KeyboardType.URL}" 
+					returnKeyType="{returnKey}" />
+	
+	<listClasses:DropDown id="lstReturnKeys" width="240" 
+						  select="returnKey = lstReturnKeys.selectedItem.label"
+						  dataProvider="{new DataProvider(returnKeyTypes)}">
+	</listClasses:DropDown>
+</r:QApplication>
