@@ -1,0 +1,12 @@
+<qnx>
+  <initialWindow>
+    <systemChrome>none</systemChrome>
+    <transparent>true</transparent>
+  </initialWindow>
+  <publisher>Renaun Erickson</publisher>
+  <category>core.media</category>
+  <icon>
+  	<image>renaun-icon.png</image>
+  </icon>
+  <splashscreen>renaun_com_splash.png</splashscreen>
+</qnx>

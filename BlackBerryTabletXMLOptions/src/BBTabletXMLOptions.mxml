@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<r:QApplication 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:r="http://ns.renaun.com/mxml/2010"
+	size="100">
+	<r:Image source="smile.png" />
+</r:QApplication>
