@@ -4,11 +4,13 @@
 	xmlns:r="http://ns.renaun.com/mxml/2010"
 	margins="{Vector.&lt;Number&gt;([12,12,12,12])}"
 	flow="{ContainerFlow.VERTICAL}"
+	align="{ContainerAlign.NEAR}"
 	size="100" sizeUnit="{SizeUnit.PERCENT}"
 	xmlns:text="qnx.ui.text.*" 
 	xmlns:listClasses="qnx.ui.listClasses.*">
 	<fx:Script>
 		<![CDATA[
+			import qnx.ui.core.ContainerAlign;
 			import qnx.ui.core.ContainerFlow;
 			import qnx.ui.core.SizeUnit;
 			import qnx.ui.data.DataProvider;
@@ -16,6 +18,7 @@
 			
 			[Bindable]
 			private var returnKey:String = ReturnKeyType.DEFAULT;
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
