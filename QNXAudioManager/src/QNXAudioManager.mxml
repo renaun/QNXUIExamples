@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<r:QApplication
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:r="http://ns.renaun.com/mxml/2010"
+	xmlns:text="qnx.ui.text.*"
+	flow="{ContainerFlow.VERTICAL}"
+	align="near"
+	width="1024" height="600"
+	complete="qapplication1_completeHandler(event)" xmlns:media="qnx.media.*" xmlns:slider="qnx.ui.slider.*">
+
+	<fx:Script>
+		<![CDATA[			
+			import qnx.events.AudioManagerEvent;
+			import qnx.events.MediaPlayerEvent;
+			import qnx.media.MediaPlayer;
+			import qnx.media.MediaPlayerRepeat;
+			import qnx.system.AudioManager;
+			import qnx.ui.core.ContainerFlow;
+			import qnx.ui.events.SliderEvent;
+
+			private var sound:Sound;
+			private var audioManager:AudioManager;
+			protected function qapplication1_completeHandler(event:Event):void
+			{
+				sound = new Sound();
+				sound.load(new URLRequest(File.applicationDirectory.resolvePath("PianoSong.mp3").url));
+				sound.play();
+				output.text = "";
+				log("file: " + File.applicationDirectory.resolvePath("PianoSong.mp3").url);
+				
+				audioManager = AudioManager.audioManager;
+				log("AvailableInputs: " + audioManager.availableInputs.length);	
+				for (var i:int = 0; i < audioManager.availableInputs.length; i++) 
+				{
+					log(i + " - " + audioManager.availableInputs[i]);	
+				}
+				log("AvailableOutputs: " + audioManager.availableOutputs.length);	
+				for (var j:int = 0; j < audioManager.availableOutputs.length; j++) 
+				{
+					log(j + " - " + audioManager.availableOutputs[j]);	
+				}
+				audioManager.addEventListener(AudioManagerEvent.AVAILABLE_INPUTS_CHANGED, eventHandler);
+				audioManager.addEventListener(AudioManagerEvent.AVAILABLE_OUTPUTS_CHANGED, eventHandler);
+				audioManager.addEventListener(AudioManagerEvent.CONNECTED_INPUT_CHANGED, eventHandler);
+				audioManager.addEventListener(AudioManagerEvent.CONNECTED_OUTPUT_CHANGED, eventHandler);
+				audioManager.addEventListener(AudioManagerEvent.INPUT_LEVEL_CHANGED, eventHandler);
+				audioManager.addEventListener(AudioManagerEvent.INPUT_MUTE_CHANGED, eventHandler);
+				audioManager.addEventListener(AudioManagerEvent.OUTPUT_LEVEL_CHANGED, eventHandler);
+				audioManager.addEventListener(AudioManagerEvent.OUTPUT_MUTE_CHANGED, eventHandler);
+				log("connectedInput: " + audioManager.connectedInput);
+				log("connectedInput: " + audioManager.connectedOutput);
+				audioManager.setInputMute(true);
+				audioManager.setInputMute(false);
+			}
+			private function eventHandler(event:Event):void
+			{
+				log("event: " + event.type);
+			}
+			private function log(msg:String):void
+			{
+				output.text += msg + "\n";
+			}
+
+			protected function slider_slider_moveHandler(event:SliderEvent):void
+			{
+				audioManager.setOutputLevel(event.value);
+			}
+
+		]]>
+	</fx:Script>
+	
+	<text:Label id="output"
+				text="hi\nih\nhi\nasdfasdfasdfasdfasdfasdfasdf"
+				multiline="true" width="1024" height="550" />
+	<slider:VolumeSlider id="slider" width="512" value="100"
+				   slider_move="slider_slider_moveHandler(event)" />
+</r:QApplication>
