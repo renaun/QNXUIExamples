@@ -10,7 +10,7 @@
 
 			protected var nextView:QView; 
 			
-			protected function backbutton1_clickHandler(event:MouseEvent):void
+			protected function addView():void
 			{
 				if (!nextView)
 					nextView = new SecondView();
@@ -20,5 +20,5 @@
 		]]>
 	</fx:Script>
 	<text:Label text="View 1" />
-	<buttons:LabelButton label="Goto New View" click="backbutton1_clickHandler(event)" />
+	<buttons:LabelButton label="Goto New View" click="addView()" />
 </r:QView>
