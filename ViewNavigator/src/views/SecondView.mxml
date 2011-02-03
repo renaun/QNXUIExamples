@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:QView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:r="http://ns.renaun.com/mxml/2010" 
+		  xmlns:text="qnx.ui.text.*"
+		  xmlns:buttons="qnx.ui.buttons.*"
+		  complete="qview1_completeHandler(event)"
+		  flow="{ContainerFlow.VERTICAL}" xmlns:view="com.renaun.view.*" >
+	<fx:Script>
+		<![CDATA[
+			import qnx.ui.core.ContainerFlow;
+			
+			protected var nextView:QView; 
+			
+			protected function addView():void
+			{
+				if (!nextView)
+					nextView = new SecondView();
+				navigator.pushView(nextView);
+			}
+
+
+			protected function qview1_completeHandler(event:Event):void
+			{
+				lbl.text = "View Count: " + navigator.length;
+			}
+
+		]]>
+	</fx:Script>
+	<text:Label id="lbl" autoSize="{TextFieldAutoSize.CENTER}" />
+	<buttons:LabelButton label="Endless Second Views" click="addView()" />
+	<buttons:LabelButton label="Do Nothing Button" />
+	<buttons:LabelButton label="Go Back" click="navigator.popView()" />
+	<buttons:LabelButton label="Go Back To First" click="navigator.popToFirstView()" />
+</view:QView>
