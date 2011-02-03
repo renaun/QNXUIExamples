@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<view:QView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<r:QView xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:r="http://ns.renaun.com/mxml/2010" 
 		  xmlns:text="qnx.ui.text.*"
 		  xmlns:buttons="qnx.ui.buttons.*"
-		  flow="{ContainerFlow.VERTICAL}" xmlns:view="com.renaun.view.*" >
+		  flow="{ContainerFlow.VERTICAL}" >
 	<fx:Script>
 		<![CDATA[
 			import qnx.ui.core.ContainerFlow;
@@ -21,4 +21,4 @@
 	</fx:Script>
 	<text:Label text="View 1" />
 	<buttons:LabelButton label="Goto New View" click="backbutton1_clickHandler(event)" />
-</view:QView>
+</r:QView>
