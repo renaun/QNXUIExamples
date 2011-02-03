@@ -2,8 +2,7 @@
 <r:QApplication 
 	xmlns:fx="http://ns.adobe.com/mxml/2009"
 	xmlns:r="http://ns.renaun.com/mxml/2010"
-	size="100" 
-	xmlns:as3viewnavigator="com.riaspace.as3viewnavigator.*">
+	size="100" >
 	<fx:Script>
 		<![CDATA[
 			import views.FirstView;
