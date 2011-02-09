@@ -1,0 +1,7 @@
+Author: Renaun Erickson http://renaun.com
+
+This code is an example of how to create a custom CellRenderer for the QNX List class.
+The examples also shows how to use Image and ImageCache in the custom CellRenderer.
+
+Tested SDK:
+BlackBerry Tablet OS SDK 0.9.2 Beta 3

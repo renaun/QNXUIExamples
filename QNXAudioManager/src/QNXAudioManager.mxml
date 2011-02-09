@@ -5,11 +5,13 @@
 	xmlns:text="qnx.ui.text.*"
 	flow="{ContainerFlow.VERTICAL}"
 	align="near"
-	width="1024" height="600"
+	width="200" height="200"
 	complete="qapplication1_completeHandler(event)" xmlns:media="qnx.media.*" xmlns:slider="qnx.ui.slider.*">
 
 	<fx:Script>
 		<![CDATA[			
+			import mx.utils.ObjectUtil;
+			
 			import qnx.events.AudioManagerEvent;
 			import qnx.events.MediaPlayerEvent;
 			import qnx.media.MediaPlayer;
@@ -22,6 +24,24 @@
 			private var audioManager:AudioManager;
 			protected function qapplication1_completeHandler(event:Event):void
 			{
+				this.graphics.clear();
+				var nc:NetConnection = new NetConnection();
+				nc.connect(null);
+				
+				var ns:NetStream = new NetStream(nc);
+				ns.client = this;
+				ns.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+				
+				output.text = "";
+				log("StageVideo: " + stage.stageVideos.length);
+				var sv:StageVideo = stage.stageVideos[0];
+				sv.addEventListener(StageVideoEvent.RENDER_STATE, renderStateHandler);
+				sv.attachNetStream(ns);
+				
+				ns.play(File.applicationDirectory.resolvePath("FSPHowToPlay.mp4").url);
+				
+				
+				return;
 				sound = new Sound();
 				sound.load(new URLRequest(File.applicationDirectory.resolvePath("PianoSong.mp3").url));
 				sound.play();
@@ -51,6 +71,27 @@
 				log("connectedInput: " + audioManager.connectedOutput);
 				audioManager.setInputMute(true);
 				audioManager.setInputMute(false);
+			}
+			private function netStatusHandler(event:NetStatusEvent):void
+			{
+				//log("nSH: " + event.type + " - " + ObjectUtil.toString(event.info));
+				if (event.info.code == "NetStream.Play.Stop")
+				{
+					;//videoToggle(false);
+				}
+			}
+			private function renderStateHandler(event:StageVideoEvent):void
+			{
+				log("event: " + event.type + " - " + event.status + " - " + event.colorSpace);
+			}
+			
+			public function onXMPData(data:Object):void
+			{
+				
+			}
+			public function onMetaData(meta:Object):void
+			{
+				
 			}
 			private function eventHandler(event:Event):void
 			{

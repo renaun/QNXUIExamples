@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/2.5">
+	<id>ListImageCache.debug</id>
+	<filename>ListImageCache</filename>
+	<name>ListImageCache-debug</name>
+	<versionNumber>1.0.0</versionNumber>
+	<initialWindow>
+		<content>ListImageCache.swf</content>
+	<autoOrients>true</autoOrients>
+    <fullScreen>true</fullScreen>
+    <visible>true</visible>
+  </initialWindow>
+</application>

@@ -29,6 +29,7 @@
       <libraryPathEntry kind="3" linkType="2" path="${BLACKBERRY_TABLET_SDK}/frameworks/libs/air/qnx-air.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
       <libraryPathEntry kind="1" linkType="1" path="${BLACKBERRY_TABLET_SDK}/frameworks/libs/blackberry"/>
+      <libraryPathEntry kind="3" linkType="1" path="/QMXML/bin/QMXML.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

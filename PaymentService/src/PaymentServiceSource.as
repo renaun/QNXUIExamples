@@ -28,7 +28,6 @@ protected function purchaseObject(event:MouseEvent):void
 	}
 	// Very brittle way to look up the object i know.
 	var obj:Object = goods[getChildIndex(event.target as DisplayObject)-1];
-	trace("url: " + File.applicationDirectory.nativePath + obj.icon);
 	paymentService.purchase(obj.sku, null, obj.name, obj.meta, obj.app, "file://" + File.applicationDirectory.nativePath + obj.icon);
 }
 private function paymentSuccessHandler(event:PaymentSuccessEvent):void
