@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   applicationComplete="windowedapplication1_applicationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import net.rim.blackberry.bbid.BBIDProfile;
+			import net.rim.blackberry.bbid.UserProperty;
+			import net.rim.blackberry.events.BBIDEvent;
+			private var bbidprofile:BBIDProfile;
+
+			protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				bbidprofile = new BBIDProfile();
+				bbidprofile.addEventListener(BBIDEvent.SUCCESS, bbidOK);
+				bbidprofile.addEventListener(BBIDEvent.ERROR, bbidFailed);
+			}
+			
+			private function bbidOK(event:BBIDEvent):void {
+				bbidprofile.getToken("BBIDv1", "urn:blackberry.com", gotBBIDToken, bbidFailed);
+				bbidprofile.getUserProperties(["username"], gotProps, bbidFailed);
+			}
+			
+			private function gotProps(properties:Array, data:* = null):void {
+				for each(var prop:UserProperty in properties) {
+					log("Got user property: " + prop);
+				}
+			}
+			
+			private function gotBBIDToken(token:String, tokenResponseParams:Array, data:* = null):void {
+				// Use token and tokenResponseParams (array of TokenParam) to make service call.
+				log("gotBBIDToken: " + token);
+			}
+			
+			private function bbidFailed(message:String, data:* = null):void {
+				// Log error message and show the user an application error 
+				log("Error: " + message);
+			}
+			
+			private function log(msg:String):void
+			{
+				output.text += msg + "\n";
+			}
+
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<s:TextArea id="output" width="100%" height="100%" />
+</s:WindowedApplication>
