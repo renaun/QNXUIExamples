@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<r:QApplication
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:r="http://ns.renaun.com/mxml/2010"
+	width="1024"
+	xmlns:text="qnx.ui.text.*" xmlns:progress="qnx.ui.progress.*" xmlns:buttons="qnx.ui.buttons.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import qnx.events.WebViewEvent;
+			import qnx.media.QNXStageWebView;
+			import qnx.ui.core.ContainerAlign;
+			import qnx.ui.core.ContainerFlow;
+			import qnx.ui.core.Containment;
+			import qnx.ui.core.SizeUnit;
+			
+			private var webView:qnx.media.QNXStageWebView;
+
+			protected function labelbutton1_clickHandler(event:MouseEvent):void
+			{
+				if (!webView)
+				{
+					webView = new qnx.media.QNXStageWebView();
+					webView.stage = this.stage;
+					webView.viewPort = new Rectangle(0,68,1024,532);
+					webView.addEventListener(WebViewEvent.DOCUMENT_LOAD_FINISHED, loadHandler);
+					webView.addEventListener(WebViewEvent.DOCUMENT_LOAD_FAILED, failHandler); 
+					webView.zoomToFitWidthOnLoad = true;
+					webView.blockPopups = true;
+					webView.zOrder = -1;
+				}
+				
+				stage.addEventListener(Event.ENTER_FRAME, progressCheck);
+				webView.loadURL("http://" + txtURL.text);
+			}
+			private function progressCheck(event:Event):void 
+			{
+				event.stopPropagation();
+				progressBar.progress = webView.loadProgress/100;
+				if (webView.loadProgress == 100)
+					stage.removeEventListener(Event.ENTER_FRAME, progressCheck);
+			}
+			private function loadHandler(event:WebViewEvent):void
+			{
+				progressBar.progress = 1;
+				webView.zOrder = 0;
+				progressBar.destroy();
+			}
+			private function failHandler(event:WebViewEvent):void
+			{
+				txtURL.text = "failed to load: " + txtURL.text;
+			}
+
+		]]>
+	</fx:Script>
+	<text:TextInput id="txtURL" width="960" y="8" containment="{Containment.UNCONTAINED}" />
+	<buttons:LabelButton label="GO" x="968" y="8" width="44" height="36" containment="{Containment.UNCONTAINED}"
+						 click="labelbutton1_clickHandler(event)"/>
+	<progress:PercentageBar id="progressBar" width="1012" y="48" containment="{Containment.UNCONTAINED}" />
+	
+</r:QApplication>
